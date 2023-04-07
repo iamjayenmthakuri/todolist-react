@@ -1,4 +1,4 @@
-import { createSlice } from "@reactjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const getInitialTodo = () => {
   const localTodoList = window.localStorage.getItem("todoList");
@@ -15,7 +15,7 @@ const intialValue = {
 export const todoSlice = createSlice({
   name: "todo",
   initalState: intialValue,
-  reducer: {
+  reducers: {
     addTodo: (state, action) => {
       state.todoList.push(action.payload);
       const todoList = window.localStorage.getItem("todoList");

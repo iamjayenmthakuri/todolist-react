@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import styles from "../styles/modules/modal.module.scss";
 import { MdOutlineClose } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import Button from "./Button";
+import { v4 as uuid } from "uuid";
+import { addTodo } from "../slices/todoSlice";
 
 function TodoModel({ modalOpen, setModalOpen }) {
-  const [Title, setTitle] = useState(" ");
-  const [Status, setStatus] = useState("incomplete");
+  const [title, setTitle] = useState(" ");
+  const [status, setStatus] = useState("incomplete");
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (title && status) {
+      dispatch(
+        addTodo({
+          id: uuid(),
+          title,
+          status,
+          time: new Date().toLocaleDateString(),
+        })
+      );
+    }
   };
   return (
     modalOpen && (
@@ -29,7 +43,7 @@ function TodoModel({ modalOpen, setModalOpen }) {
               <input
                 type="text"
                 id="title"
-                value={Title}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </label>
@@ -38,7 +52,7 @@ function TodoModel({ modalOpen, setModalOpen }) {
               <select
                 name="status"
                 id="status"
-                vlaue={Status}
+                vlaue={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
                 <option value="incomplete">Incomplete</option>
