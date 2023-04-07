@@ -1,6 +1,7 @@
 import React from "react";
 import Button, { SelectButton } from "./Button";
 import styles from "../styles/modules/app.module.scss";
+import TodoModel from "./TodoModel";
 
 function AppHeader() {
   return (
@@ -11,7 +12,7 @@ function AppHeader() {
         <option value="incomplete">Incomplete</option>
         <option value="complete">Complete</option>
       </SelectButton>
-      TODO
+      <TodoModel />
     </div>
   );
 }
